@@ -1,0 +1,18 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "finance": "Finance",
+  "settings": "Settings",
+  "financeDescription": "Tools for planning your personal finances.",
+  "mortgage": "Mortgage calculator",
+  "comingSoon": "Coming soon",
+  "mortgagePlaceholder": "A place for loan inputs, payment calculations and saved scenarios.",
+  "theme": "Theme",
+  "systemTheme": "System",
+  "lightTheme": "Light",
+  "darkTheme": "Dark",
+  "language": "Language",
+  "debugTools": "Developer tools"
+}
