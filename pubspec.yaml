@@ -1,11 +1,14 @@
 name: my_life
-description: Personal life application based on Friflex Flutter Starter.
 publish_to: none
+
 version: 0.1.0+1
+
 environment:
   sdk: ^3.13.0
+
 workspace:
-  - feature/*
+  - packages/*
+
 dependencies:
   flutter:
     sdk: flutter

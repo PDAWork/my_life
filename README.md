@@ -126,13 +126,13 @@ flutter run -d chrome --dart-define=APP_ENV=test
 После изменения `APP_ENV` перезапустите приложение полностью.
 Все окружения сейчас работают без сервера.
 
-Определения окружений находятся в `feature/core/lib/src/app_env.dart`.
+Определения окружений находятся в `packages/core/lib/src/app_env.dart`.
 Injectable выбирает реализации `AppEnvironment` и `IAppConfig` по имени окружения.
 
 ## Архитектура и структура
 
 Проект организован как Dart Pub workspace: корневое приложение и отдельные
-пакеты в `feature/`. Прикладные экраны пока находятся в `lib/features/`.
+пакеты в `packages/`. Прикладные экраны пока находятся в `lib/features/`.
 
 ```text
 my_life/
@@ -145,7 +145,7 @@ my_life/
 │   ├── features/             # Экраны root и error
 │   ├── l10n/                 # ARB-переводы и генерация slang
 │   └── gen/                  # Сгенерированные ссылки на ресурсы
-├── feature/
+├── packages/
 │   ├── core/                 # Окружения, конфигурация, собственный DI
 │   ├── debug/                # Сервис, маршруты и экраны отладки, собственный DI
 │   └── ui_kit/               # Темы, цвета, виджеты, собственный DI
@@ -169,12 +169,12 @@ my_life/
 
 Каждый пакет объявляет собственную переменную `getIt = GetIt.instance`:
 
-| Пакет      | Файл локатора                              |
-|------------|--------------------------------------------|
-| Приложение | `lib/di/injection.dart`                    |
-| `core`     | `feature/core/lib/core_injection.dart`     |
-| `ui_kit`   | `feature/ui_kit/lib/ui_kit_injection.dart` |
-| `debug`    | `feature/debug/lib/debug_injection.dart`   |
+| Пакет      | Файл локатора                               |
+|------------|---------------------------------------------|
+| Приложение | `lib/di/injection.dart`                     |
+| `core`     | `packages/core/lib/core_injection.dart`     |
+| `ui_kit`   | `packages/ui_kit/lib/ui_kit_injection.dart` |
+| `debug`    | `packages/debug/lib/debug_injection.dart`   |
 
 Все переменные ссылаются на один контейнер. Фичи используют свою переменную
 `getIt`, не импортируя корневое приложение.
@@ -223,7 +223,7 @@ dart run melos run build
 
 ### Темы и ресурсы
 
-Темы и цвета находятся в `feature/ui_kit/lib/src/theme/`.
+Темы и цвета находятся в `packages/ui_kit/lib/src/theme/`.
 `ThemeNotifier` управляет режимом темы, `ThemeConsumer` предоставляет его виджетам.
 Новые ресурсы добавляйте в каталоги, объявленные в секции `flutter.assets`
 корневого `pubspec.yaml`, и обновляйте генерацию.
@@ -232,12 +232,12 @@ dart run melos run build
 
 В `dev` и `test` кнопка с иконкой жука открывает `/debug`.
 Вложенные страницы: `tokens`, `ui_kit`, `icons`, `theme`, `lang`, `components`.
-Маршруты определены в `feature/debug/lib/src/debug_routes.dart`.
+Маршруты определены в `packages/debug/lib/src/debug_routes.dart`.
 Сервис логирования инициализируется и в `prod`, но debug-маршруты там исключены.
 
 ## Добавление модуля
 
-Создайте каталог `feature/<name>` с `lib/` и `pubspec.yaml`.
+Создайте каталог `packages/<name>` с `lib/` и `pubspec.yaml`.
 Например, для модуля финансов:
 
 ```yaml
@@ -254,7 +254,7 @@ dependencies:
   my_life_ui_kit: any
 ```
 
-Шаблон `workspace: [feature/*]` автоматически включает такой пакет в workspace.
+Шаблон `workspace: [packages/*]` автоматически включает такой пакет в workspace.
 Чтобы приложение могло импортировать его, добавьте `my_life_finance: any`
 в корневые `dependencies`, затем выполните `flutter pub get`.
 
@@ -271,7 +271,7 @@ dependencies:
    закреплённых в корне, используйте `any`.
 2. Объявите локальную переменную `final getIt = GetIt.instance` и точку
    генерации с `@InjectableInit.microPackage()` по примеру
-   `feature/core/lib/core_injection.dart`.
+   `packages/core/lib/core_injection.dart`.
 3. Экспортируйте файл локатора через публичный файл пакета. Внутри фичи
    импортируйте свой локатор; не импортируйте `package:my_life/`.
 4. Выполните генерацию пакета и подключите его сгенерированный модуль через
@@ -284,7 +284,7 @@ dependencies:
 ## Supabase
 
 Клиент Supabase и подключение к серверу пока не реализованы.
-В `feature/core/lib/src/app_config/app_config.dart` подготовлен интерфейс
+В `packages/core/lib/src/app_config/app_config.dart` подготовлен интерфейс
 `IAppConfig` и реализации `DevAppConfig`, `ProdAppConfig`, `TestAppConfig`.
 У всех сейчас пустые `baseUrl` и `supabasePublishableKey`.
 
