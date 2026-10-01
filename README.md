@@ -19,7 +19,7 @@
 - [Supabase](#supabase)
 - [Проверка и сборка](#проверка-и-сборка)
 - [Решение типичных проблем](#решение-типичных-проблем)
-- [Адаптация стартера и лицензия](#адаптация-стартера-и-лицензия)
+- [Адаптация стартера](#адаптация-стартера)
 
 ## Текущее состояние
 
@@ -44,19 +44,19 @@
 
 ## Технологии
 
-| Назначение | Инструменты |
-| --- | --- |
-| Интерфейс | Flutter, Material |
-| Навигация | `go_router` |
-| Внедрение зависимостей | `get_it`, `injectable`, `injectable_generator` |
-| Состояние | `provider`; `flutter_bloc` подключён, настроен наблюдатель |
-| Локализация | `slang`, `slang_flutter`, `flutter_localizations` |
-| Темы | `theme_tailor`, `theme_tailor_annotation` |
-| Ресурсы | `flutter_gen_runner`, `flutter_svg`, `lottie`, `phosphor_icons` |
-| Логирование | `talker_flutter`, логгеры Dio и BLoC |
-| HTTP | `dio` подключён как зависимость |
-| Workspace и генерация | Dart Pub workspaces, Melos, `build_runner` |
-| Анализ кода | `flutter_lints`, Dart Analyzer |
+| Назначение             | Инструменты                                                     |
+|------------------------|-----------------------------------------------------------------|
+| Интерфейс              | Flutter, Material                                               |
+| Навигация              | `go_router`                                                     |
+| Внедрение зависимостей | `get_it`, `injectable`, `injectable_generator`                  |
+| Состояние              | `provider`; `flutter_bloc` подключён, настроен наблюдатель      |
+| Локализация            | `slang`, `slang_flutter`, `flutter_localizations`               |
+| Темы                   | `theme_tailor`, `theme_tailor_annotation`                       |
+| Ресурсы                | `flutter_gen_runner`, `flutter_svg`, `lottie`, `phosphor_icons` |
+| Логирование            | `talker_flutter`, логгеры Dio и BLoC                            |
+| HTTP                   | `dio` подключён как зависимость                                 |
+| Workspace и генерация  | Dart Pub workspaces, Melos, `build_runner`                      |
+| Анализ кода            | `flutter_lints`, Dart Analyzer                                  |
 
 Ограничения версий находятся в [pubspec.yaml](pubspec.yaml), разрешённые версии —
 в [pubspec.lock](pubspec.lock).
@@ -110,11 +110,11 @@ flutter run -d macos --dart-define=APP_ENV=dev
 
 Окружение задаётся при запуске или сборке через `--dart-define=APP_ENV=...`.
 
-| Значение | Назначение | Инструменты отладки |
-| --- | --- | --- |
-| `dev` | Разработка | Доступны |
-| `prod` | Production, значение по умолчанию | Маршруты отладки исключены |
-| `test` | Тестовая конфигурация приложения | Доступны |
+| Значение | Назначение                        | Инструменты отладки        |
+|----------|-----------------------------------|----------------------------|
+| `dev`    | Разработка                        | Доступны                   |
+| `prod`   | Production, значение по умолчанию | Маршруты отладки исключены |
+| `test`   | Тестовая конфигурация приложения  | Доступны                   |
 
 ```sh
 flutter run -d chrome --dart-define=APP_ENV=prod
@@ -169,12 +169,12 @@ my_life/
 
 Каждый пакет объявляет собственную переменную `getIt = GetIt.instance`:
 
-| Пакет | Файл локатора |
-| --- | --- |
-| Приложение | `lib/di/injection.dart` |
-| `core` | `feature/core/lib/core_injection.dart` |
-| `ui_kit` | `feature/ui_kit/lib/ui_kit_injection.dart` |
-| `debug` | `feature/debug/lib/debug_injection.dart` |
+| Пакет      | Файл локатора                              |
+|------------|--------------------------------------------|
+| Приложение | `lib/di/injection.dart`                    |
+| `core`     | `feature/core/lib/core_injection.dart`     |
+| `ui_kit`   | `feature/ui_kit/lib/ui_kit_injection.dart` |
+| `debug`    | `feature/debug/lib/debug_injection.dart`   |
 
 Все переменные ссылаются на один контейнер. Фичи используют свою переменную
 `getIt`, не импортируя корневое приложение.
@@ -326,16 +326,16 @@ flutter build linux --dart-define=APP_ENV=prod
 
 ## Решение типичных проблем
 
-| Симптом | Что проверить |
-| --- | --- |
-| SDK не удовлетворяет `^3.13.0` | Версии из `flutter --version`, выбранный SDK/FVM |
-| Не найден локальный пакет | `resolution: workspace`, имя пакета, зависимость в корне; выполните `flutter pub get` |
-| Не найдены сгенерированные файлы или регистрации DI | Выполните `dart run melos run build`, проверьте подключение микромодуля через `ExternalModule` |
-| Конфликт генерации после изменения исходников | В нужном пакете выполните `dart run build_runner build --delete-conflicting-outputs`; затрагиваются конфликтующие результаты генерации |
-| Нет кнопки отладки | Проверьте `APP_ENV`: по умолчанию используется `prod` |
-| Устройство не отображается | Выполните `flutter doctor` и `flutter devices` |
+| Симптом                                             | Что проверить                                                                                                                          |
+|-----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| SDK не удовлетворяет `^3.13.0`                      | Версии из `flutter --version`, выбранный SDK/FVM                                                                                       |
+| Не найден локальный пакет                           | `resolution: workspace`, имя пакета, зависимость в корне; выполните `flutter pub get`                                                  |
+| Не найдены сгенерированные файлы или регистрации DI | Выполните `dart run melos run build`, проверьте подключение микромодуля через `ExternalModule`                                         |
+| Конфликт генерации после изменения исходников       | В нужном пакете выполните `dart run build_runner build --delete-conflicting-outputs`; затрагиваются конфликтующие результаты генерации |
+| Нет кнопки отладки                                  | Проверьте `APP_ENV`: по умолчанию используется `prod`                                                                                  |
+| Устройство не отображается                          | Выполните `flutter doctor` и `flutter devices`                                                                                         |
 
-## Адаптация стартера и лицензия
+## Адаптация стартера
 
 Сохранены UI kit, ресурсы, темы, инструменты Talker и подход к запуску приложения.
 DI переведён на GetIt/Injectable, локализация — на slang;
@@ -343,6 +343,3 @@ DI переведён на GetIt/Injectable, локализация — на sla
 не подключены к текущему главному экрану. Мобильные ограничения ориентации
 и отключение масштабирования текста сняты. Геолокация, сервисы Aurora/HMS
 и демонстрационные API не подключены.
-
-Исходный стартер распространяется под MIT. Уведомление об авторских правах
-Friflex LLC и текст лицензии сохранены в [LICENSE](LICENSE).
