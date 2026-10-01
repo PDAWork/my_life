@@ -1,55 +1,64 @@
-# Miscellaneous
-*.class
+# OS and temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
 *.log
 *.pyc
 *.swp
-.DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
+*.swo
+*~
 
-# IntelliJ related
+# Editor caches and local project metadata
 *.iml
 *.ipr
 *.iws
 .idea/
+.atom/
+.history/
+.svn/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# Shared .run/ and .vscode/ configurations remain versioned.
 
-# Flutter/Dart/Pub related
-**/doc/api/
+# Compiled Java files
+*.class
+
+# Dart / Flutter / Pub caches (including feature packages)
+**/.dart_tool/
+**/.pub-cache/
+**/.pub/
+**/.packages
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.widget_preview/
 **/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
-/coverage/
+**/doc/api/
 
-# Symbolication related
+# Build and test outputs for all workspace packages
+**/build/
+**/coverage/
+.build/
+.buildlog/
+migrate_working_dir/
+
+# Flutter symbolication and obfuscation outputs
 app.*.symbols
-
-# Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# Android Studio build outputs
+/android/app/debug/
+/android/app/profile/
+/android/app/release/
 
-# Widget Preview related
-.widget_preview/
+# Swift Package Manager caches
+.swiftpm/
 
-# FVM Version Cache
+# FVM SDK cache; keep .fvmrc versioned
 .fvm/
 
 # Local workspace materials
 .codex/
 design-reference/
+
+# Platform-specific caches, Pods, ephemeral files and signing keys are
+# covered by android/, ios/, macos/, windows/ and linux/ .gitignore files.
+# Keep pubspec.lock, Podfile.lock and generated Dart sources versioned.
