@@ -3,16 +3,20 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_life/app/app_context_ext.dart';
-import 'package:my_life/app/app_env.dart';
-import 'package:my_life/features/debug/debug_routes.dart';
+import 'package:my_life/di/injection.dart';
+import 'package:my_life_core/core.dart' hide getIt;
+import 'package:my_life_debug/debug.dart' hide getIt;
 
 class RootScreen extends StatelessWidget {
   const RootScreen({required this.navigationShell, super.key});
+
   final StatefulNavigationShell navigationShell;
+
   void _select(int index) => navigationShell.goBranch(
     index,
     initialLocation: index == navigationShell.currentIndex,
   );
+
   @override
   Widget build(BuildContext context) {
     final labels = [context.l10n.finance, context.l10n.settings];
@@ -63,12 +67,11 @@ class RootScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-          floatingActionButton: context.di.env == AppEnv.prod
+          floatingActionButton: !getIt<AppEnvironment>().showDebugTools
               ? null
               : FloatingActionButton.small(
                   tooltip: context.l10n.debugTools,
-                  onPressed: () =>
-                      unawaited(context.pushNamed(DebugRoutes.debugScreenName)),
+                  onPressed: () => unawaited(context.pushNamed(DebugRoutes.debugScreenName)),
                   child: const Icon(Icons.bug_report_outlined),
                 ),
         );

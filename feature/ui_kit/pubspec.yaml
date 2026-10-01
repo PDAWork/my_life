@@ -1,0 +1,19 @@
+name: my_life_ui_kit
+description: Shared theme and widgets for my_life.
+publish_to: none
+version: 0.1.0
+environment:
+  sdk: ^3.13.0
+resolution: workspace
+dependencies:
+  flutter:
+    sdk: flutter
+  get_it: any
+  injectable: any
+  provider: any # Version is constrained by the workspace root.
+  theme_tailor_annotation: any # Version is constrained by the workspace root.
+dev_dependencies:
+  injectable_generator: any
+  build_runner: any
+  flutter_lints: any
+  theme_tailor: any

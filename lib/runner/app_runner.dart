@@ -3,53 +3,46 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_life/app/app_env.dart';
 import 'package:my_life/app/app_root.dart';
-import 'package:my_life/di/di_container.dart';
-import 'package:my_life/features/debug/debug_service.dart';
-import 'package:my_life/features/debug/i_debug_service.dart';
+import 'package:my_life/di/injection.dart';
 import 'package:my_life/features/error/error_screen.dart';
-import 'package:my_life/router/app_router.dart';
-import 'package:my_life/runner/timer_runner.dart';
+import 'package:my_life/l10n/gen/translations.g.dart';
+import 'package:my_life_core/core.dart' hide getIt;
+import 'package:my_life_debug/debug.dart' hide getIt;
+
 part 'errors_handlers.dart';
 
 class AppRunner {
   AppRunner(this.env);
+
   final AppEnv env;
-  Future<void> run(List<String> arguments) async {
+
+  Future<void> run() async {
     final binding = WidgetsFlutterBinding.ensureInitialized();
-    final debugService = DebugService();
-    final timer = TimerRunner(debugService);
-    Bloc.observer = debugService.blocObserver;
-    _initErrorHandlers(debugService);
+    await LocaleSettings.setLocale(AppLocale.ru);
+
     binding.deferFirstFrame();
     try {
-      final container = DiContainer(env: env, dService: debugService);
-      await container
-          .init(
-            onProgress: timer.logOnProgress,
-            onComplete: timer.logOnComplete,
-            onError: timer.logOnError,
-          )
-          .timeout(const Duration(seconds: 10));
-      runApp(
-        AppRoot(
-          diContainer: container,
-          router: AppRouter.createRouter(debugService, env: env),
-        ),
-      );
+      await configureDependencies(env);
+
+      final debugService = getIt<IDebugService>();
+      Bloc.observer = debugService.blocObserver;
+      _initErrorHandlers(debugService);
+
+      runApp(const AppRoot());
     } catch (error, stack) {
+      final debugService = getIt.isRegistered<IDebugService>() ? getIt<IDebugService>() : DebugService();
       debugService.logError('Startup failed', error: error, stackTrace: stack);
+
       runApp(
         ErrorScreen(
           error: error,
           stackTrace: stack,
-          onRetry: () => unawaited(run(arguments)),
+          onRetry: () => unawaited(run()),
         ),
       );
     } finally {
       binding.allowFirstFrame();
-      timer.stop();
     }
   }
 }

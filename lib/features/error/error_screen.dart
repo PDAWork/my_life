@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// {@template ErrorScreen}
 ///  Экран, когда в приложении произошла фатальная ошибка
 /// {@endtemplate}
+/// TODO(pda): Нужно будет передалать
 class ErrorScreen extends StatelessWidget {
   /// {@macro ErrorScreen}
   const ErrorScreen({

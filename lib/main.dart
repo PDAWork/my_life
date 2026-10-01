@@ -1,3 +1,4 @@
-import 'package:my_life/targets/prod.dart' as prod;
+import 'package:my_life/runner/app_runner.dart';
+import 'package:my_life_core/core.dart' hide getIt;
 
-void main() => prod.main();
+Future<void> main() => AppRunner(AppEnv.fromDartDefine()).run();
