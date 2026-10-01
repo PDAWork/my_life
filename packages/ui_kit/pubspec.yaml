@@ -15,5 +15,13 @@ dependencies:
 dev_dependencies:
   injectable_generator: any
   build_runner: any
+  flutter_gen_runner: any
   flutter_lints: any
   theme_tailor: any
+flutter:
+  assets:
+    - assets/images/
+flutter_gen:
+  assets:
+    outputs:
+      package_parameter_enabled: true

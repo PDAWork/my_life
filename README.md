@@ -148,7 +148,7 @@ my_life/
 ├── packages/
 │   ├── core/                 # Окружения, конфигурация, собственный DI
 │   ├── debug/                # Сервис, маршруты и экраны отладки, собственный DI
-│   └── ui_kit/               # Темы, цвета, виджеты, собственный DI
+│   └── ui_kit/               # Темы, цвета, изображения, виджеты, собственный DI
 ├── assets/
 │   ├── icons/                # SVG-иконки
 │   └── lottie/               # Анимации
@@ -225,8 +225,18 @@ dart run melos run build
 
 Темы и цвета находятся в `packages/ui_kit/lib/src/theme/`.
 `ThemeNotifier` управляет режимом темы, `ThemeConsumer` предоставляет его виджетам.
-Новые ресурсы добавляйте в каталоги, объявленные в секции `flutter.assets`
-корневого `pubspec.yaml`, и обновляйте генерацию.
+Общие изображения хранятся в `packages/ui_kit/assets/images/`. Они объявлены
+в `packages/ui_kit/pubspec.yaml` и доступны другим пакетам через публичный
+импорт `package:my_life_ui_kit/ui_kit.dart`:
+
+```dart
+UiKitAssets.images.danyaError.image(width: 120);
+UiKitAssets.images.danyaNoData.provider();
+```
+
+Для новых общих изображений добавьте файлы в `packages/ui_kit/assets/images/`
+и выполните `dart run melos run build`. Иконки и Lottie приложения остаются
+в корневом `assets/` и объявляются в корневом `pubspec.yaml`.
 
 ### Отладка
 

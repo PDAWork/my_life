@@ -1,3 +1,4 @@
+export 'src/assets/ui_kit_assets.dart';
 export 'src/theme/app_colors_scheme.dart';
 export 'src/theme/app_theme.dart';
 export 'src/theme/theme_context_ext.dart';
