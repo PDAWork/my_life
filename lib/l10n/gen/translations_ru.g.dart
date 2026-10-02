@@ -50,11 +50,20 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// ru: 'Финансы'
 	String get finance => 'Финансы';
 
+	/// ru: 'Продукты'
+	String get products => 'Продукты';
+
 	/// ru: 'Настройки'
 	String get settings => 'Настройки';
 
 	/// ru: 'Инструменты для планирования личных финансов.'
 	String get financeDescription => 'Инструменты для планирования личных финансов.';
+
+	/// ru: 'Кредитный калькулятор'
+	String get creditCalculator => 'Кредитный калькулятор';
+
+	/// ru: 'Здесь появится расчёт кредита.'
+	String get creditCalculatorPlaceholder => 'Здесь появится расчёт кредита.';
 
 	/// ru: 'Ипотечный калькулятор'
 	String get mortgage => 'Ипотечный калькулятор';
@@ -94,8 +103,11 @@ extension on Translations {
 		return switch (path) {
 			'helloWorld' => 'Привет, мир!',
 			'finance' => 'Финансы',
+			'products' => 'Продукты',
 			'settings' => 'Настройки',
 			'financeDescription' => 'Инструменты для планирования личных финансов.',
+			'creditCalculator' => 'Кредитный калькулятор',
+			'creditCalculatorPlaceholder' => 'Здесь появится расчёт кредита.',
 			'mortgage' => 'Ипотечный калькулятор',
 			'comingSoon' => 'Скоро появится',
 			'mortgagePlaceholder' => 'Здесь будут параметры кредита, расчёт платежей и сохранённые сценарии.',

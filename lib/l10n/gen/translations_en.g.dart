@@ -43,8 +43,11 @@ class TranslationsEn with BaseTranslations<AppLocale, Translations> implements T
 	@override String get helloWorld => 'Hello World!';
 
 	@override String get finance => 'Finance';
+	@override String get products => 'Products';
 	@override String get settings => 'Settings';
 	@override String get financeDescription => 'Tools for planning your personal finances.';
+	@override String get creditCalculator => 'Credit calculator';
+	@override String get creditCalculatorPlaceholder => 'Loan calculations will appear here.';
 	@override String get mortgage => 'Mortgage calculator';
 	@override String get comingSoon => 'Coming soon';
 	@override String get mortgagePlaceholder => 'A place for loan inputs, payment calculations and saved scenarios.';
@@ -66,8 +69,11 @@ extension on TranslationsEn {
 		return switch (path) {
 			'helloWorld' => 'Hello World!',
 			'finance' => 'Finance',
+			'products' => 'Products',
 			'settings' => 'Settings',
 			'financeDescription' => 'Tools for planning your personal finances.',
+			'creditCalculator' => 'Credit calculator',
+			'creditCalculatorPlaceholder' => 'Loan calculations will appear here.',
 			'mortgage' => 'Mortgage calculator',
 			'comingSoon' => 'Coming soon',
 			'mortgagePlaceholder' => 'A place for loan inputs, payment calculations and saved scenarios.',
