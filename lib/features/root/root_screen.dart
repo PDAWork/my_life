@@ -19,14 +19,18 @@ class RootScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final labels = [context.l10n.finance, context.l10n.settings];
-    const icons = [
-      Icons.account_balance_wallet_outlined,
-      Icons.settings_outlined,
-    ];
     return LayoutBuilder(
       builder: (context, constraints) {
         final wide = constraints.maxWidth >= 800;
+        final labels = [
+          wide ? context.l10n.finance : context.l10n.products,
+          context.l10n.settings,
+        ];
+        const icons = [
+          Icons.account_balance_wallet_outlined,
+          Icons.settings_outlined,
+        ];
+
         return Scaffold(
           body: SafeArea(
             child: Row(
@@ -71,7 +75,9 @@ class RootScreen extends StatelessWidget {
               ? null
               : FloatingActionButton.small(
                   tooltip: context.l10n.debugTools,
-                  onPressed: () => unawaited(context.pushNamed(DebugRoutes.debugScreenName)),
+                  onPressed: () => unawaited(
+                    context.pushNamed(DebugRoutes.debugScreenName),
+                  ),
                   child: const Icon(Icons.bug_report_outlined),
                 ),
         );
