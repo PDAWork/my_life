@@ -1,0 +1,39 @@
+name: Verify navigation branch
+
+on:
+  push:
+    branches: [codex/navigation-products-calculator]
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: |
+          flutter pub get
+          dart run melos bootstrap
+      - name: Generate code
+        run: |
+          dart run slang
+          dart run melos exec --depends-on=build_runner --order-dependents -c 1 -- dart run build_runner build --delete-conflicting-outputs
+      - name: Analyze and test
+        run: |
+          flutter analyze
+          flutter test
+          flutter build web --release --base-href /my_life/ --dart-define=APP_ENV=prod
+      - name: Commit generated translations
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lib/l10n/gen
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: regenerate translations"
+            git push
+          fi
