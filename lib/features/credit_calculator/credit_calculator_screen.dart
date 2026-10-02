@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_life/app/app_context_ext.dart';
+import 'package:my_life/app/widgets/in_development_placeholder.dart';
 
 class CreditCalculatorScreen extends StatelessWidget {
   const CreditCalculatorScreen({super.key});
@@ -14,26 +15,8 @@ class CreditCalculatorScreen extends StatelessWidget {
         leading: BackButton(onPressed: () => context.goNamed('finance')),
         title: Text(l10n.creditCalculator),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.calculate_outlined, size: 48),
-              const SizedBox(height: 16),
-              Text(
-                l10n.comingSoon,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                l10n.creditCalculatorPlaceholder,
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
+      body: InDevelopmentPlaceholder(
+        description: l10n.creditCalculatorPlaceholder,
       ),
     );
   }

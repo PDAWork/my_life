@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_life/app/app_context_ext.dart';
+import 'package:my_life/app/widgets/in_development_placeholder.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -10,7 +11,7 @@ class SettingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settings)),
-      body: Center(child: Text(l10n.comingSoon)),
+      body: const InDevelopmentPlaceholder(),
     );
   }
 }

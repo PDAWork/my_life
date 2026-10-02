@@ -18,12 +18,16 @@ class $AssetsImagesGen {
   AssetGenImage get danyaError =>
       const AssetGenImage('assets/images/danya_error.png');
 
+  /// File path: assets/images/danya_in_dev.png
+  AssetGenImage get danyaInDev =>
+      const AssetGenImage('assets/images/danya_in_dev.png');
+
   /// File path: assets/images/danya_no_data.png
   AssetGenImage get danyaNoData =>
       const AssetGenImage('assets/images/danya_no_data.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [danyaError, danyaNoData];
+  List<AssetGenImage> get values => [danyaError, danyaInDev, danyaNoData];
 }
 
 abstract final class Assets {
